@@ -75,7 +75,8 @@ public class GroceryManagementSystem {
                 System.out.println("6. Calculate Total Cost");
                 System.out.println("7. Make Payment");
                 System.out.println("8. Show Previous Orders");
-                System.out.println("9. Exit");
+                System.out.println("9. Logout");
+                System.out.println("10. Exit");
                 System.out.print("Enter your choice: ");
 
                 int choice = getUserChoice();
@@ -106,6 +107,9 @@ public class GroceryManagementSystem {
                         showPreviousOrders();
                         break;
                     case 9:
+                        logout();
+                        break;
+                    case 10:
                         System.out.println("Exiting program...");
                         System.exit(0);
                         break;
@@ -147,6 +151,11 @@ public class GroceryManagementSystem {
             }
         }
         return choice;
+    }
+
+    private static void logout() {
+        isLoggedIn = false;
+        System.out.println("Logged out successfully.");
     }
 
     private static void addItem() {
@@ -320,6 +329,11 @@ public class GroceryManagementSystem {
     }
 
     private static void showPreviousOrders() {
+        if (!isLoggedIn) {
+            System.out.println("Please login to view previous orders.");
+            return;
+        }
+
         if (transactions.isEmpty()) {
             System.out.println("No previous orders.");
             return;
